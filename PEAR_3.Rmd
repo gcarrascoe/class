@@ -1,0 +1,143 @@
+---
+title: Principios de Estadística Aplicada con R
+subtitle: Teorema de Límite Central
+Project: 
+author:
+- name: Gabriel Carrasco Escobar
+  affiliation: Universidad Peruana Cayetano Heredia
+- name: Jorge Ruiz Cabrejos
+  affiliation: Universidad Peruana Cayetano Heredia
+Comment:
+web: 
+date: 08 de febrero del 2018
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+---
+
+<p style="text-align: center;"> 
+Rutinas y comandos complementarios del curso *Principios de Estadística Aplicada con R (PEAR)*
+
+*Cualquier problema con este código, porfavor contactar a gabriel.carrasco@upch.pe*
+</p>
+
+Los paquetes que se utilizaran son:
+
+```{r message = FALSE, warning = FALSE}
+library(dplyr)
+library(rafalib)
+```
+
+```{r include = FALSE}
+rm(list=ls())
+wd <- "C:/Users/Jorge/Desktop/Universidad/Curso R - FASPA"
+csv <- "Databases/Winzell2004_covar_v2.csv"
+dat <- read.csv(file.path(wd, csv))
+```
+
+Los ejercicios a continuación utilizan la base de datos `Winzell2004_covar_v2.csv`, a la que colocaremos de nombre `dat`. 
+
+```{r eval = FALSE, message = FALSE, warning = FALSE}
+dat <- read.csv("C:/Usuario/Estudiante/Escritorio/Estadistica/Winzell2004_covar_v2.csv")
+```
+
+
+## Introducción al TLC
+
+El teorema de limite central (TLC) plantea que  cuando las observaciones son (1) muestras independientes (2) obtenidas aleatoriamente (3) de una población con distribución normal, se cumple lo siguiente:
+
+  * La distribución de los valores de las medias muestrales seguirán una distribución normal.
+  * El promedio de la distribución muestral será igual al promedio real de la población.
+  * La varianza de la distribución muestral será igual a la varianza de la población dividida entre el tamaño de la muestra
+  * La desviación estándar de la distribución muestral está referida como "error estándar" del estadístico
+
+## Muestreo en R
+
+Para demostrar el TLC, empezaremos utilizando `mean` para hallar la media de la variable `Bodyweight`. Añadimos la opcion `na.rm=T` para que nuestro resultado no sea `NA`
+
+```{r}
+mean(dat$Bodyweight,na.rm=T)
+```
+
+La base de datos `Winzell2004_covar_v2.csv` tiene 846 observaciones, por lo que el resultado anterior es la media de estas 846 observaciones.
+
+Ahora, con la función `sample` escogemos una muestra aleatoria de estas 846 observaciones.
+
+Para este ejemplo, utilizaremos una muestra de 100 observaciones de la variabñle `Bodyweight`, la cual definiremos en el objeto `N`. Los datos escogidos aleatoriamente por R lo almacenaremos en `X`.
+
+```{r}
+N <- 100
+X <- sample(dat$Bodyweight,N) 
+```
+
+Ahora, sacamos la media de `X`. ¿La respuesta es similar? 
+
+```{r, eval = FALSE, message = FALSE, warning = FALSE}
+mean(X,na.rm=T)
+```
+
+Para comprobar que la función `sample` esta tomando los valores de la variable `Bodyweight` de forma aleatoria, a continuación lo probamos tres veces más a manera de ejemplo y con distintos tamaños de muestra:
+
+#### Prueba 1
+```{r}
+N <- 50
+X <- sample(dat$Bodyweight,N)
+mean(X,na.rm=T)
+```
+#### Prueba 2
+```{r}
+N <- 100
+X <- sample(dat$Bodyweight,N)
+mean(X,na.rm=T)
+```
+#### Prueba 3
+```{r}
+N <- 200
+X <- sample(dat$Bodyweight,N)
+mean(X,na.rm=T)
+```
+
+## Loops
+
+Un loop nos permite realizar una serie de acciones o comandos de forma repititiva.
+
+Para continuar con la demostración del TLC, utilizaremos un loop para realizar el ejercicio anterior 10 mil veces. Para el ejemplo, primero definimos el número de repeticiones en `rep`. A continuación, creamos un vector numérico al que nombraremos `tlc` y definimos el número de muestras aleatorias que el loop escogera cada vez que se repita (para este caso 100).
+
+```{r}
+rep <- 10000
+tlc <- vector("numeric",rep)
+N <- 100
+```
+
+Con estos tres objetos creados, procedemos a incluirlos dentro del loop
+
+```{r}
+for (i in 1:rep) {
+  sample <- sample(dat$Bodyweight,N)
+  tlc[i] <- mean(sample, na.rm=T)
+}
+```
+
+El resultado es un vector llamado `tlc` que contiene 10 mil medias escogidas aleatoriamente de la variable `Bodyweight`. Para visualizarlo lo graficamos con `hist`.
+
+```{r}
+hist(tlc)
+```
+
+Complementamos el análisis colocando una linea con la media de `Bodyweight` y `tlc`.
+
+La opción `lwd` nos permite aumentar el grosor de la línea.
+
+```{r}
+hist(tlc)
+abline(v=mean(dat$Bodyweight, na.rm=T), col="red", lwd=2)
+abline(v=mean(tlc), col="blue", lwd=2)
+```
+
+Utilizando la función `summary` en el objeto `tlc` obtenemos más información acerca de su contenido.
+
+```{r}
+summary(tlc)
+```
+
