@@ -28,7 +28,7 @@ output:
 - Escoger de acuerdo a la configuración de su computadora la versión de 32 o 64 bit
 - Ejecutar el programa descargado
 
-Para mas detalles sobre la instalacion [ir a la guia de instalacion](https://EdgarJoao30.github.io/qgis_class/instalacion.html)
+Para mas detalles sobre la instalacion [ir a la guia de instalacion](https://gcarrascoe.github.io/class/qgis_instalacion.html)
 
 ## Descripción General del programa
 2. QGIS cuenta con 4 secciones importantes que hay que identificar antes de empezar el trabajo:
