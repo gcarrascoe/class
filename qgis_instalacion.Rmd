@@ -44,4 +44,4 @@ output:
 <div align="left"><img src="images_download/image11.png" width=500 ></div>
 13. QGIS esta listo para ser utilizado.
 <div align="left"><img src="images_download/image12.png" width=500 ></div>
-14. [ir a la guia de practica](https://EdgarJoao30.github.io/qgis_class/index.html)
+14. [ir a la guia de practica](https://gcarrascoe.github.io/class/qgis.html)
