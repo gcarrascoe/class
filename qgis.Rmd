@@ -38,7 +38,8 @@ Para mas detalles sobre la instalacion [ir a la guia de instalacion](https://gca
 - Importación de datos
 <div align="center"><img src="images/imagen2.png" width=500 ></div>
 
-# Datos Vectoriales: Importación
+# Ejercicio 1
+## Datos Vectoriales: Importación
 3. En la sección Importación de datos, hacer click en __*Agregar capa vectorial*__ <div align="left"><img src="images/imagen1.png" width=40 height=40></div>
 4. Agregar al área de trabajo todos los archivos .shp de la carpeta __*CAPAS*__.
 5. Hacer click derecho sobre la capa importada y seleccionar __*Zoom a la capa*__ para visualizarla en la ventana de visualización de datos.
@@ -46,7 +47,7 @@ Para mas detalles sobre la instalacion [ir a la guia de instalacion](https://gca
 7. Para guardar el proyecto, hacer click en Guardar dentro de la sección de Menú y controles, y seleccionar la dirección donde se guardará el proyecto.
 <div align="center"><img src="images/importacion.png" width=700 ></div>
 
-# Datos Vectoriales: Manejo de atributos
+## Datos Vectoriales: Manejo de atributos
 8. Seleccionar la capa __*ríos*__ dentro de la Tabla de contenidos.
 9. Hacer click en __*Abrir tabla de atributos*__ <div align="left"><img src="images/imagen3.png" width=40 height=40></div> en el Menú y controles.
 10. Observar los datos que contiene la capa.
@@ -56,7 +57,7 @@ Para mas detalles sobre la instalacion [ir a la guia de instalacion](https://gca
 14. Hacer click en __*Mover la selección Arriba*__ <div align="left"><img src="images/imagen5.png" width=40 height=40></div>, dentro de Tabla de atributos.
 <div align="center"><img src="images/manejo_atributos.png" width=700 ></div>
 
-# Datos Vectoriales: Simbología de capas
+## Datos Vectoriales: Simbología de capas
 15. Seleccionar la capa __*ciudades*__ dentro de la Tabla de contenidos.
 16. Hacer click derecho y seleccionar __*propiedades*__.
 17. Ir a la sección __*Estilo*__.
@@ -75,7 +76,7 @@ Para mas detalles sobre la instalacion [ir a la guia de instalacion](https://gca
 30. Ver en la ventana de visualización de datos los cambios realizados.
 <div align="center"><img src="images/simbologia.png" width=700 ></div>
 
-# Datos vectoriales: Geoprocesos básicos
+## Datos vectoriales: Geoprocesos básicos
 31. Ir a la __*barra de herramientas – vectorial – herramientas de geoproceso -> Cortar*__.
 32. Establecer __*capa vectorial de entrada -> ciudades*__.
 33. Establecer __*capa de corte -> zona_estudio*__.
@@ -92,13 +93,13 @@ Para mas detalles sobre la instalacion [ir a la guia de instalacion](https://gca
 44. Establecer __*capa de entrada -> ciudades_clip, capa de interseccion -> rios_buffer*__, establecer archivo shape de salida (‘ciudades_interseccion’).
 <div align="center"><img src="images/geoprocesos.png" width=700 ></div>
 
-# Instalación de Complementos (Plugins)
+## Instalación de Complementos (Plugins)
 45. Ir a la __*barra de herramientas – Complementos*__.
 46. En el campo __*buscar*__ escribir __*OpenLayers*__, seleccionar __*OpenLayers Plugin*__ y hacer click en __*instalar complemento*__.
 47. Ir a la __*barra de herramientas – Web- OpenLayers Plugin –OpenStreetMap –> OpenStreetMap*__. (se debe tener conexión a internet).
 <div align="center"><img src="images/complementos.png" width=700 ></div>
 
-# Datos Vectoriales: Exportación
+## Datos Vectoriales: Exportación
 48. Seleccionar la capa __*ciudades_interseccion*__ dentro de la Tabla de contenidos.
 49. Hacer click derecho y seleccionar __*Guardar como*__.
 50. Seleccionar Formato __*Comma Separated Value [CSV]*__.
@@ -106,3 +107,52 @@ Para mas detalles sobre la instalacion [ir a la guia de instalacion](https://gca
 52. Seleccionar la dirección donde se va a guardar el archivo.
 53. Hacer click en __*Ok*__.
 <div align="center"><img src="images/export.png" width=700 ></div>
+
+# Ejercicio 2
+## Importar datos vectoriales
+1. Importar el shapefile __*loreto_dist*__.
+2. Arrastrar el archivo __*cases*__ del explorador de archivos al panel de capas.
+
+## Union de atributos
+3. Dar click derecho a la capa __*loreto_dist*__, ir a la pestana __*uniones*__. 
+4. Dar click al simbolo __*Anadir union vectorial*__, seleccionar capa de union __*cases*__, campo de union __*district*__ y, campo objetivo __*NOMBDIST*__.
+<div align="center"><img src="images/ej2_joins.png" width=700 ></div>
+
+## Cambio de Simbologia
+5. Ir a la tabla de atributos de la capa __*loreto_dist*__, iniciar edicion, crear nuevo campo de tipo numerico de nombre __*cases*__ y establecer el valor al mismo del campo __*cases_vivax*__.
+<div align="center"><img src="images/ej2_newfield.png" width=700 ></div>
+
+6. Abrir las propiedades de la capa __*loreto_dist -> estilos*__, seleccionar estilo __*graduado*__, elegir columna __*cases*__, elegir la rampa de color, dar click en __*clasificar*__, aceptar.
+<div align="center"><img src="images/ej2_simbologia.png" width=700 ></div>
+<div align="center"><img src="images/ej2_final.png" width=700 ></div>
+
+# Ejercicio 3
+## Importar datos vectoriales
+1. Agregar el archivo __*study_boundary*__ al panel de capas.
+2. En la seccion de importacion de datos hacer click en __*Agregar capa de texto delimitado*__.
+3. Seleccionar el archivo __*Belen.csv*__, __*campo X = x, campo Y = y*__. Aceptar.
+<div align="center"><img src="images/ej3_csv.png" width=700 ></div>
+<div align="center"><img src="images/ej3_import.png" width=700 ></div>
+
+## Heatmap - Kernel density
+4. Buscar el complemento Heatmap y asegurarse que este activado.
+<div align="center"><img src="images/ej3_plugin.png" width=700 ></div>
+5. Ir a la __*barra de herramientas -> raster -> Heatmap*__. 
+6. Establecer capa de puntos de entrada a __*Belen*__, nombrar al raster de salida __*heatmap_qtf*__, radio 30,en __*Avanzado*__, establecer como campo de peso a __*qtf_v*__. Aceptar.
+<div align="center"><img src="images/ej3_heatmap.png" width=500 ></div>
+7. Repetir el paso 6, cambiando el campo de peso a __*log_v*__, nombrar al raster de salida __*heatmap_log*__.
+8. Dar simbologia a las capas.
+<div align="center"><img src="images/ej3_heatmap2.png" width=700 ></div>
+<div align="center"><img src="images/ej3_heatmap3.png" width=700 ></div>
+
+## Nearest Neighbour interpolation
+9. Ir a la barra de herramientas -> procesamiento -> caja de herramientas.
+10. En el buscador, escribir *'nearest'*, dar doble click a __*Nearest neighbour*__ del grupo __*SAGA*__. 
+<div align="center"><img src="images/ej3_nearpng.png" width=200 ></div>
+11. En puntos establecer a la capa Belen, Atributo = haplo_grp, extension = __*study_boundary*__, tamano de la celda = 0.000001, nombrar al raster de salida __*nn_haplo*__. 
+<div align="center"><img src="images/ej3_near2.png" width=700 ></div>
+<div align="center"><img src="images/ej3_near3.png" width=700 ></div>
+12. Ir a la barra de herramientas -> raster -> extraccion -> clipper
+13. archivo de entrada = __*nn_haplo*__, archivo de salida = __*nn_haplo_bound*__, metodo de cortado = capa mascara, capa mascara = __*study_boundary*__. Aceptar.
+14. Cambiar la simbologia.
+<div align="center"><img src="images/ej3_near4.png" width=700 ></div>
