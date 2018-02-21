@@ -3,8 +3,7 @@
 Repository for lectures and R codes
 
 [Principios de Estadistica aplicada con R](https://gcarrascoe.github.io/class/PEAR)
-
-      [Introducción a R](https://gcarrascoe.github.io/class/PEAR_1)
+[ Introducción a R](https://gcarrascoe.github.io/class/PEAR_1)
    
       [Estadística descriptiva](https://gcarrascoe.github.io/class/PEAR_2)
 
