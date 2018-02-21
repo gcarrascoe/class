@@ -135,8 +135,12 @@ Para mas detalles sobre la instalacion [ir a la guia de instalacion](https://gca
 3. Seleccionar el archivo __*Belen.csv*__, __*campo X = x, campo Y = y*__. Aceptar.
 <div align="center"><img src="images/ej3_csv.png" width=700 ></div>
 <div align="center"><img src="images/ej3_import.png" width=700 ></div>
-4. Agregar el archivo __*yru65056046-160209-2217.png*__.
+
+## Importacion mapa base
+4. Agregar el archivo __*yru65056046-160209-2217.map*__.
 <div align="center"><img src="images/ej3_basemap.png" width=700 ></div>
+
+## Simbologia & etiquetas
 5. Abrir las propiedades de la capa __*study_area*__, darle estilo categorizado.
 6. En la pestana __*Etiquetas*__, seleccionar __*mostrar etiquetas para esta capa*__, etiquetar con = __*site*__.
 7. En la sub-pestana __*ubicacion*__, seleccionar __*usar perimetro (curva)*__ y, posicion dependiente de la orientacion de lineas.
