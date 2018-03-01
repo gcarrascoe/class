@@ -230,141 +230,176 @@ Universidad Peruana Cayetano Heredia<br><h4 class="date"><em>19 de febrero del 2
 </p>
 <p>Los paquetes que se utilizaran son:</p>
 <pre class="r"><code>library(dplyr)
-library(rafalib)
-library(Publish)
 library(epiDisplay)</code></pre>
 <p>Los ejercicios a continuación utilizan la base de datos <code>Winzell2004_covar_v2.csv</code>, a la que colocaremos de nombre <code>dat</code>.</p>
 <pre class="r"><code>dat &lt;- read.csv(&quot;C:/Usuario/Estudiante/Escritorio/Estadistica/Winzell2004_covar_v2.csv&quot;)</code></pre>
 <div id="pruebas-de-hipotesis-parametricas" class="section level2">
 <h2>Pruebas de hipótesis paramétricas</h2>
 <div id="diferencia-de-medias---prueba-t-test" class="section level3">
-<h3>Diferencia de medias - prueba t-test</h3>
-<p>La prueba de t-test se utiliza para comparar variables categóricas de dos categorias con una variable numerica de <strong>distribución normal</strong>.</p>
-<p>En este caso, nuestras dos categorias son la dieta <code>chow</code> y la dieta <code>hf</code>. Asumiremos que nuestra variable numérica, peso, tiene distribución normal.</p>
-<p>A continuación, utilizamos <code>filter</code> para separar el peso de aquellos con una dieta <code>chow</code> y una dieta <code>hf</code></p>
-<pre class="r"><code>chow&lt;-filter(dat,Diet==&quot;chow&quot;)
-hf&lt;-filter(dat,Diet==&quot;hf&quot;)</code></pre>
+<h3>Diferencia de medias - Prueba T-Test</h3>
+<p>La prueba de t-test se utiliza para comparar variables continuas en dos grupos. La variable dependiente numerica tiene que tener <strong>distribución normal</strong>.</p>
+<p>En este caso, los grupos de comparación estan en la variable <code>Diet</code> (dieta <code>chow</code> y dieta <code>hf</code>. Asumiremos que nuestra variable numérica, peso, tiene distribución normal.</p>
+<p><strong>Nota:<a href="https://gcarrascoe.github.io/class/PEAR_2.html">Revisar el análisis de dsitribución normal</a></strong></p>
+<p>Nuestra base de datos <code>Dat</code> contiene la información de la población. Para fines de esta práctica, seleccionaremos una muestra de 200 ratones utilizando la función <code>sample_n</code> para seleccionar una muestra.</p>
+<pre class="r"><code>sample&lt;-sample_n(dat,200)</code></pre>
 <p>Utilizamos <code>var.test</code> para determinar si existe homogeneidad de varianzas.</p>
-<pre class="r"><code>var.test(chow$Bodyweight, hf$Bodyweight)</code></pre>
+<pre class="r"><code>var.test(sample$Bodyweight~sample$Diet)</code></pre>
 <pre><code>## 
 ##  F test to compare two variances
 ## 
-## data:  chow$Bodyweight and hf$Bodyweight
-## F = 0.60077, num df = 447, denom df = 392, p-value = 1.92e-07
+## data:  sample$Bodyweight by sample$Diet
+## F = 0.50152, num df = 108, denom df = 89, p-value = 0.000648
 ## alternative hypothesis: true ratio of variances is not equal to 1
 ## 95 percent confidence interval:
-##  0.4954843 0.7275335
+##  0.3351566 0.7446518
 ## sample estimates:
 ## ratio of variances 
-##           0.600769</code></pre>
+##          0.5015207</code></pre>
 <p>El resultado de nuestro interés es el <code>p-value</code> o valor de p.</p>
-<p>Si <code>p-value</code> es <strong>menor</strong> a 0.05, se considera significativo y se rechaza la hipótesis nula. Es decir, las varianzas son distintas.</p>
-<p>Si <code>p-value</code> es <strong>mayor</strong> a 0.05, se considera no significativo y se acepta la hipótesis nula. Es decir, las varianzas son iguales</p>
-<p>En este caso, obtenemos un <code>p-value = 1.92e-07</code>.</p>
-<p>1.92e-07 es la notación científica para 0.000000192. Es decir, p es menor a 0.05.</p>
+<ul>
+<li>Hipotesis nula (H0): Varianzas iguales</li>
+<li>Hipotesis Alternativa (Ha): Varianzas diferentes</li>
+</ul>
+<p>Si <code>p-value</code> es <strong>menor</strong> a 0.05, se considera significativo y se rechaza la hipótesis nula. Es decir, se concluye que las varianzas son diferentes.</p>
+<p>Si <code>p-value</code> es <strong>mayor</strong> a 0.05, se considera no significativo y no se rechaza la hipótesis nula. Es decir, se concluye que las varianzas son iguales</p>
+<p style="text-align: center;">
+<p><strong>NOTA:</strong> El valor de p puede dar como resultado un valor como: <code>p-value = 1.92e-07</code>.</p>
+Esto ocurre debido a que 1.92e-07 es la notación científica para 0.000000192. Es decir, p es menor a 0.05.
+</p>
 </div>
-<div id="varianzas-diferentes---test-de-student" class="section level3">
-<h3>Varianzas diferentes - Test de Student</h3>
-<p>Para nuestro caso, al ser las varianzas distintas utilizamos el test de Student con la función <code>t.test</code>.</p>
-<p>Las variables a comparar son <code>chow$Bodyweight</code> y <code>hf$Bodyweight</code>.</p>
-<p>Al ser las varianzas distintas, colocamos <code>TRUE</code> después de <code>var.equal =</code>.</p>
-<pre class="r"><code>t.test(chow$Bodyweight,hf$Bodyweight,var.equal = TRUE, paired= FALSE)</code></pre>
-<pre><code>## 
-##  Two Sample t-test
-## 
-## data:  chow$Bodyweight and hf$Bodyweight
-## t = -7.3116, df = 839, p-value = 6.16e-13
-## alternative hypothesis: true difference in means is not equal to 0
-## 95 percent confidence interval:
-##  -3.893142 -2.245293
-## sample estimates:
-## mean of x mean of y 
-##  27.41279  30.48201</code></pre>
-<p>Utilizamos el resultado de <code>p-value</code> para determinar si existe una diferencia estadisticamente significativa.</p>
-<p>De existir, p sera menor a 0.05. Caso contrario p sera mayor a 0.05.</p>
-</div>
-<div id="varianzas-iguales---test-de-welch" class="section level3">
-<h3>Varianzas iguales - Test de Welch</h3>
-<p>En el caso de tener varianzas iguales (un p&gt;0.05 al utilizar <code>var.test</code>), utilizamos el test de Welch.</p>
-<p>A diferencia de antes, ahora colocamos <code>FALSE</code> después de <code>var.equal =</code>.</p>
-<pre class="r"><code>t.test(chow$Bodyweight, hf$Bodyweight,var.equal = FALSE, paired=FALSE)</code></pre>
+<div id="varianzas-diferentes---test-de-welch" class="section level3">
+<h3>Varianzas diferentes - Test de Welch</h3>
+<p>Para nuestro caso, al ser las varianzas diferentes utilizamos el test de Welch con la función <code>t.test</code>.</p>
+<p>Las variables a comparar son <code>sample$Bodyweight</code> y <code>sample$Diet</code>.</p>
+<p>Colocamos <code>var.equal = FALSE</code> al ser las varianzas diferentes.</p>
+<pre class="r"><code>t.test(sample$Bodyweight~sample$Diet,var.equal = FALSE, paired=FALSE)</code></pre>
 <pre><code>## 
 ##  Welch Two Sample t-test
 ## 
-## data:  chow$Bodyweight and hf$Bodyweight
-## t = -7.1932, df = 735.02, p-value = 1.562e-12
+## data:  sample$Bodyweight by sample$Diet
+## t = -3.5714, df = 155.94, p-value = 0.0004725
 ## alternative hypothesis: true difference in means is not equal to 0
 ## 95 percent confidence interval:
-##  -3.906880 -2.231555
+##  -5.219351 -1.501905
 ## sample estimates:
-## mean of x mean of y 
-##  27.41279  30.48201</code></pre>
+## mean in group chow   mean in group hf 
+##           27.33982           30.70044</code></pre>
+<p>Utilizamos el resultado de <code>p-value</code> para determinar si existe una diferencia estadisticamente significativa.</p>
+<ul>
+<li>Hipotesis nula (H0): La diferencia de medias es igual a 0</li>
+<li>Hipotesis Alternativa (Ha): La diferencia de medias no es igual a 0</li>
+</ul>
+<p>Si <code>p-value</code> es <strong>menor</strong> a 0.05, se considera significativo y se rechaza la hipótesis nula. Es decir, se concluye que las medias son estadisticamente diferentes entre los grupos.</p>
+<p>Si <code>p-value</code> es <strong>mayor</strong> a 0.05, se considera no significativo y no se rechaza la hipótesis nula. Es decir, se concluye que las medias no son estadisticamente diferentes entre los grupos.</p>
+</div>
+<div id="varianzas-iguales---test-de-student" class="section level3">
+<h3>Varianzas iguales - Test de Student</h3>
+<p>En el caso de tener varianzas iguales (un p&gt;0.05 al utilizar <code>var.test</code>), utilizamos el test de student.</p>
+<p>Las variables a comparar son <code>sample$Bodyweight</code> y <code>sample$Diet</code>.</p>
+<p>Al ser las varianzas iguales, colocamos <code>var.equal = TRUE</code>.</p>
+<pre class="r"><code>t.test(sample$Bodyweight~sample$Diet,var.equal = TRUE, paired= FALSE)</code></pre>
+<pre><code>## 
+##  Two Sample t-test
+## 
+## data:  sample$Bodyweight by sample$Diet
+## t = -3.6871, df = 197, p-value = 0.0002933
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##  -5.158111 -1.563145
+## sample estimates:
+## mean in group chow   mean in group hf 
+##           27.33982           30.70044</code></pre>
+<p>Utilizamos el resultado de <code>p-value</code> para determinar si existe una diferencia estadisticamente significativa.</p>
+<ul>
+<li>Hipotesis nula (H0): La diferencia de medias es igual a 0</li>
+<li>Hipotesis Alternativa (Ha): La diferencia de medias no es igual a 0</li>
+</ul>
+<p>Si <code>p-value</code> es <strong>menor</strong> a 0.05, se considera significativo y se rechaza la hipótesis nula. Es decir, se concluye que las medias son estadisticamente diferentes entre los grupos.</p>
+<p>Si <code>p-value</code> es <strong>mayor</strong> a 0.05, se considera no significativo y no se rechaza la hipótesis nula. Es decir, se concluye que las medias no son estadisticamente diferentes entre los grupos.</p>
 </div>
 </div>
 <div id="pruebas-de-hipotesis-no-parametricas" class="section level2">
 <h2>Pruebas de hipótesis no paramétricas</h2>
 <div id="prueba-de-mann-whitney" class="section level3">
 <h3>Prueba de Mann-Whitney</h3>
-<p>La prueba de Mann-Whitney se utiliza para comparar variables categóricas de dos categorias con una variable numerica de <strong>distribución no normal</strong>.</p>
-<p>Para el siguiente caso, utilizamos las categorias de dieta <code>chow</code> y <code>hf</code>. Asumiremos que nuestra variable numérica, peso, tiene una distribución no normal.</p>
-<p>La función que se utiliza es <code>wilcox.test</code></p>
-<pre class="r"><code>wilcox.test(Bodyweight~Diet,data=dat)</code></pre>
+<p>La prueba de Mann-Whitney se utiliza para comparar variables continuas en dos grupos. La variable dependiente numerica tiene que tener <strong>distribución no normal</strong>.</p>
+<p>Para el siguiente caso, utilizamos las categorias de sexo <code>M</code> y <code>F</code>. Nuestra variable numérica sera <code>en_intake</code>, la cual tiene una distribución no normal:</p>
+<pre class="r"><code>hist(sample$en_intake)</code></pre>
+<p><img src="data:image/png;base64,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" width="672" /></p>
+<p>La prueba de Mann-Whitney <strong>no compara medianas</strong>; determina si una variable tiene valores más altos (localización entre grupos).</p>
+<p>La función que se utiliza para realizar el test es <code>wilcox.test</code></p>
+<pre class="r"><code>wilcox.test(en_intake~Sex,data=sample)</code></pre>
 <pre><code>## 
 ##  Wilcoxon rank sum test with continuity correction
 ## 
-## data:  Bodyweight by Diet
-## W = 64906, p-value = 4.726e-11
+## data:  en_intake by Sex
+## W = 5273, p-value = 0.4857
 ## alternative hypothesis: true location shift is not equal to 0</code></pre>
 <p>Utilizamos el resultado de <code>p-value</code> para determinar si existe una diferencia estadisticamente significativa.</p>
-<p>De existir, p sera menor a 0.05. Caso contrario p sera mayor a 0.05.</p>
+<ul>
+<li>Hipotesis nula (H0): Las poblaciones tienen localizaciones iguales</li>
+<li>Hipotesis Alternativa (Ha): Las poblaciones difieren con respecto a la localización</li>
+</ul>
+<p>Si <code>p-value</code> es <strong>menor</strong> a 0.05, se considera significativo y se rechaza la hipótesis nula. Es decir, se concluye que las localizaciones (valores) son estadisticamente diferentes entre los grupos.</p>
+<p>Si <code>p-value</code> es <strong>mayor</strong> a 0.05, se considera no significativo y no se rechaza la hipótesis nula. Es decir, se concluye que las localizaciones (valores) no son estadisticamente diferentes entre los grupos.</p>
 </div>
 <div id="prueba-fisher-exact" class="section level3">
 <h3>Prueba Fisher Exact</h3>
-<p>El test de Fisher Exact se utiliza para comparar variables categóricas.</p>
-<p>Para el siguiente caso, compararemos las categorias de dieta (<code>chow</code> y <code>hf</code>) con sexo (<code>M</code> y <code>F</code>).</p>
+<p>El test de Fisher Exact es una prueba de independencia para una tabla de contingencia comparando dos variables categóricas.</p>
+<p>Para el siguiente caso, comparamos las categorias de dieta (<code>chow</code> y <code>hf</code>) con sexo (<code>M</code> y <code>F</code>).</p>
 <p>La función utiliza una tabla para el análisis. Por lo que primero pasaremos nuestros datos de <code>Diet</code> y <code>Sex</code> a un objeto tabla con <code>table</code>.</p>
-<pre class="r"><code>tabla_fisher&lt;-table(dat$Diet,dat$Sex)
+<pre class="r"><code>tabla_fisher&lt;-table(sample$Diet,sample$Sex)
 tabla_fisher</code></pre>
 <pre><code>##       
-##          F   M
-##   chow 225 224
-##   hf   200 197</code></pre>
-<p>Utilizamos la función <code>chisq.test</code> con el objeto tabla creado para obtener nuestro resultado.</p>
+##         F  M
+##   chow 53 57
+##   hf   42 48</code></pre>
+<p>Utilizamos la función <code>fisher.test</code> con el objeto tabla creado para obtener nuestro resultado.</p>
 <pre class="r"><code>fisher.test(tabla_fisher)</code></pre>
 <pre><code>## 
 ##  Fisher's Exact Test for Count Data
 ## 
 ## data:  tabla_fisher
-## p-value = 0.9452
+## p-value = 0.8872
 ## alternative hypothesis: true odds ratio is not equal to 1
 ## 95 percent confidence interval:
-##  0.7483337 1.3081149
+##  0.585761 1.929115
 ## sample estimates:
 ## odds ratio 
-##  0.9894081</code></pre>
+##   1.062314</code></pre>
 <p>Utilizamos <code>p-value</code> para determinar si existe una diferencia estadisticamente significativa.</p>
-<p>De existir, p sera menor a 0.05. Caso contrario p sera mayor a 0.05.</p>
+<ul>
+<li>Hipotesis nula (H0): Las variables son independientes</li>
+<li>Hipotesis Alternativa (Ha): Las variables no son independientes</li>
+</ul>
+<p>Si <code>p-value</code> es <strong>menor</strong> a 0.05, se considera significativo y se rechaza la hipótesis nula. Es decir, se concluye que sexo y dieta están asociados de forma significativa.</p>
+<p>Si <code>p-value</code> es <strong>mayor</strong> a 0.05, se considera no significativo y no se rechaza la hipótesis nula. Es decir, se concluye que sexo y dieta no están asociados de forma significativa.</p>
 </div>
 <div id="prueba-x-de-pearson" class="section level3">
 <h3>Prueba X² de Pearson</h3>
 <p>La prueba X² de Pearson se utiliza para comparar variables categóricas.</p>
 <p>Para el siguiente caso, compararemos las categorias de dieta (<code>chow</code> y <code>hf</code>) con sexo (<code>M</code> y <code>F</code>).</p>
 <p>La función utiliza una tabla para el análisis. Por lo que primero pasaremos nuestros datos de <code>Diet</code> y <code>Sex</code> a un objeto tabla con <code>table</code>.</p>
-<pre class="r"><code>tabla_chi&lt;-table(dat$Diet,dat$Sex)
+<pre class="r"><code>tabla_chi&lt;-table(sample$Diet,sample$Sex)
 tabla_chi</code></pre>
 <pre><code>##       
-##          F   M
-##   chow 225 224
-##   hf   200 197</code></pre>
+##         F  M
+##   chow 53 57
+##   hf   42 48</code></pre>
 <p>Utilizamos la función <code>chisq.test</code> con el objeto tabla creado para obtener nuestro resultado.</p>
 <pre class="r"><code>chisq.test(tabla_chi)</code></pre>
 <pre><code>## 
 ##  Pearson's Chi-squared test with Yates' continuity correction
 ## 
 ## data:  tabla_chi
-## X-squared = 7.1725e-05, df = 1, p-value = 0.9932</code></pre>
+## X-squared = 0.0050632, df = 1, p-value = 0.9433</code></pre>
 <p>Utilizamos <code>p-value</code> para determinar si existe una diferencia estadisticamente significativa.</p>
-<p>De existir, p sera menor a 0.05. Caso contrario p sera mayor a 0.05.</p>
+<ul>
+<li>Hipotesis nula (H0): Las variables son independientes</li>
+<li>Hipotesis Alternativa (Ha): Las variables no son independientes</li>
+</ul>
+<p>Si <code>p-value</code> es <strong>menor</strong> a 0.05, se considera significativo y se rechaza la hipótesis nula. Es decir, se concluye que sexo y dieta están asociados de forma significativa.</p>
+<p>Si <code>p-value</code> es <strong>mayor</strong> a 0.05, se considera no significativo y no se rechaza la hipótesis nula. Es decir, se concluye que sexo y dieta no están asociados de forma significativa.</p>
 </div>
 </div>
 
