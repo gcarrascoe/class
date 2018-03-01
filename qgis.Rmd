@@ -217,5 +217,5 @@ Para mas detalles sobre la instalacion [ir a la guia de instalacion](https://gca
 <div align="center"><img src="images/ej4_shape2.png" width=200 ></div>
 <div align="center"><img src="images/ej4_shape.png" width=700 ></div>
 
-## Exportación
+## Exportación del mapa
 16. Dar click en el símbolo <div align="left"><img src="images/icon_exportpdf.png" width=40 ></div>. y guardar el archivo en la dirección de su proyecto.
