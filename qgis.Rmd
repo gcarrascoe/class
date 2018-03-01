@@ -44,7 +44,7 @@ Para mas detalles sobre la instalacion [ir a la guia de instalacion](https://gca
 4. Agregar al área de trabajo todos los archivos .shp de la carpeta __*CAPAS*__.
 5. Hacer click derecho sobre la capa importada y seleccionar __*Zoom a la capa*__ para visualizarla en la ventana de visualización de datos.
 6. Seleccionar y arrastar las capas dentro de la Tabla de contenidos para ordenarlas.
-7. En el panel de capas, dar click en el simbolo __*Anadir grupo*__ <div align="left"><img src="images/ej1_simbgroup.png" width=40 height=40></div>, crear los grupos *'poligonos'*, *'lineas'* y *'puntos'*.
+7. En el panel de capas, dar click en el símbolo __*Anadir grupo*__ <div align="left"><img src="images/ej1_simbgroup.png" width=40 height=40></div>, crear los grupos *'poligonos'*, *'lineas'* y *'puntos'*.
 8. Arrastrar las capas a los grupos *'poligonos'*, *'lineas'* y *'puntos'* de acuerdo al tipo de geometria.
 <div align="center"><img src="images/ej1_grupos.png" width=200 ></div>
 9. Para guardar el proyecto, hacer click en Guardar dentro de la sección de Menú y controles, y seleccionar la dirección donde se guardará el proyecto.
@@ -80,7 +80,7 @@ Para mas detalles sobre la instalacion [ir a la guia de instalacion](https://gca
 <div align="center"><img src="images/simbologia.png" width=700 ></div>
 
 ## Datos vectoriales: Geoprocesos básicos
-33. Ir a la __*barra de herramientas – vectorial – herramientas de geoproceso -> Cortar*__.
+33. Ir a la __*barra de herramientas –> vectorial –> herramientas de geoproceso -> Cortar*__.
 34. Establecer __*capa vectorial de entrada -> ciudades*__.
 35. Establecer __*capa de corte -> zona_estudio*__.
 36. Establecer __*ruta de archivo shape de salida. Aceptar. Cerrar.*__ (poner nombre de archivo: ‘ciudades_clip.shp’).
@@ -93,7 +93,7 @@ Para mas detalles sobre la instalacion [ir a la guia de instalacion](https://gca
 <div align="center"><img src="images/geoprocesos.png" width=700 ></div>
 
 ## Instalación de Complementos (Plugins)
-43. Ir a la __*barra de herramientas – Complementos*__.
+43. Ir a la __*barra de herramientas –> Complementos*__.
 44. En el campo __*buscar*__ escribir __*OpenLayers*__, seleccionar __*OpenLayers Plugin*__ y hacer click en __*instalar complemento*__.
 45. Ir a la __*barra de herramientas – Web- OpenLayers Plugin –OpenStreetMap –> OpenStreetMap*__. (se debe tener conexión a internet).
 <div align="center"><img src="images/complementos.png" width=700 ></div>
@@ -113,13 +113,13 @@ Para mas detalles sobre la instalacion [ir a la guia de instalacion](https://gca
 2. Arrastrar el archivo __*cases*__ del explorador de archivos al panel de capas.
 
 ## Union de atributos
-3. Dar click derecho a la capa __*loreto_dist*__, ir a la pestana __*uniones*__. 
-4. Dar click al simbolo __*Anadir union vectorial*__, seleccionar capa de union __*cases*__, campo de union __*district*__ y, campo objetivo __*NOMBDIST*__.
+3. Dar click derecho a la capa __*loreto_dist*__, ir a la pestaña __*uniones*__. 
+4. Dar click al símbolo __*Anadir union vectorial*__, seleccionar capa de unión __*cases*__, campo de unión __*district*__ y, campo objetivo __*NOMBDIST*__.
 <div align="center"><img src="images/ej2_joins.png" width=700 ></div>
 
-## Cambio de Simbologia
+## Cambio de Simbología
 5. Ir a la __*tabla de atributos*__ de la capa __*loreto_dist*__, hacer click en el símbolo <div align="left"><img src="images/imagen6.png" width=40 height=40></div> (cntrl + E).
-6. Hacer click en el símbolo <div align="left"><img src="images/imagen7.png" width=40 height=40></div> __*Anadir campo*__ (cntrl + W), crear nuevo campo de tipo numerico de nombre __*cases*__ y establecer el valor al mismo del campo __*cases_vivax*__.
+6. Hacer click en el símbolo <div align="left"><img src="images/imagen7.png" width=40 height=40></div> __*Añadir campo*__ (cntrl + W), crear nuevo campo de tipo numerico de nombre __*cases*__ y establecer el valor al mismo del campo __*cases_vivax*__.
 7. En el símbolo <div align="left"><img src="images/imagen8.png" width=70 height=40></div> seleccionar __*cases*__, en campo de escritura ubicado a la derecha, escribir __*cases_vivax*__, hacer click en __*Actualizar todo*__, ubicado a la derecha del campo de escritura.
 <div align="center"><img src="images/ej2_barra.png" width=700 ></div>
 8. Hacer click en <div align="left"><img src="images/imagen9.png" width=40 height=40></div> (cntrl + G), hacer click en <div align="left"><img src="images/imagen10.png" width=40 height=40></div> (cntrl + E). Cerrar la ventana.
@@ -131,42 +131,91 @@ Para mas detalles sobre la instalacion [ir a la guia de instalacion](https://gca
 # Ejercicio 3
 ## Importar datos vectoriales
 1. Agregar los archivos __*study_boundary*__ y __*study_area*__, ubicados en la carpeta __*Belen*__, al panel de capas.
-2. En la seccion de importacion de datos hacer click en __*Agregar capa de texto delimitado*__.
+2. En la sección de importación de datos hacer click en __*Agregar capa de texto delimitado*__.
 3. Seleccionar el archivo __*Belen.csv*__, __*campo X = x, campo Y = y*__. Aceptar.
 <div align="center"><img src="images/ej3_csv.png" width=700 ></div>
 <div align="center"><img src="images/ej3_import.png" width=700 ></div>
 
-## Importacion mapa base
+## Importación mapa base
 4. Agregar el archivo __*yru65056046-160209-2217.map*__.
 <div align="center"><img src="images/ej3_basemap.png" width=700 ></div>
 
-## Simbologia & etiquetas
+## Simbología & etiquetas
 5. Abrir las propiedades de la capa __*study_area*__, darle estilo categorizado.
-6. En la pestana __*Etiquetas*__, seleccionar __*mostrar etiquetas para esta capa*__, etiquetar con = __*site*__.
-7. En la sub-pestana __*ubicacion*__, seleccionar __*usar perimetro (curva)*__ y, posicion dependiente de la orientacion de lineas.
+6. En la pestaña __*Etiquetas*__, seleccionar __*mostrar etiquetas para esta capa*__, etiquetar con = __*site*__.
+7. En la sub-pestaña __*ubicacion*__, seleccionar __*usar perimetro (curva)*__ y, posición dependiente de la orientación de líneas.
 <div align="center"><img src="images/ej3_labels.png" width=700 ></div>
 <div align="center"><img src="images/ej3_sites.png" width=700 ></div>
 8. Revisar analisis estadistico* 
 
 ## Heatmap - Kernel density
-9. Buscar el complemento Heatmap y asegurarse que este activado.
+9. Buscar el complemento *Heatmap* y asegurarse que este activado.
 <div align="center"><img src="images/ej3_plugin.png" width=700 ></div>
 10. Ir a la __*barra de herramientas -> raster -> Heatmap*__. 
 11. Establecer capa de puntos de entrada a __*Belen*__, nombrar al raster de salida __*heatmap_qtf*__, radio 30,en __*Avanzado*__, establecer como campo de peso a __*qtf_v*__. Aceptar.
 <div align="center"><img src="images/ej3_heatmap.png" width=500 ></div>
-12. Repetir el paso 6, cambiando el campo de peso a __*log_v*__, nombrar al raster de salida __*heatmap_log*__.
-13. Dar simbologia a las capas.
+12. Repetir el paso 11, cambiando el campo de peso a __*log_v*__, nombrar al raster de salida __*heatmap_log*__.
+13. Dar simbología a las capas.
 <div align="center"><img src="images/ej3_heatmap2.png" width=700 ></div>
 <div align="center"><img src="images/ej3_heatmap3.png" width=700 ></div>
 
 ## Nearest Neighbour interpolation
-14. Ir a la barra de herramientas -> procesamiento -> caja de herramientas.
+14. Ir a la barra de __*herramientas -> procesamiento -> caja de herramientas*__.
 15. En el buscador, escribir *'nearest'*, dar doble click a __*Nearest neighbour*__ del grupo __*SAGA*__. 
 <div align="center"><img src="images/ej3_nearpng.png" width=200 ></div>
-16. En puntos establecer a la capa Belen, Atributo = haplo_grp, extension = __*study_boundary*__, tamano de la celda = 0.000001, nombrar al raster de salida __*nn_haplo*__. 
+16. En puntos establecer a la capa Belen, Atributo = __*haplo_grp*__, extension = __*study_boundary*__, tamaño de la celda = 0.000001, nombrar al raster de salida __*nn_haplo*__. 
 <div align="center"><img src="images/ej3_near2.png" width=700 ></div>
 <div align="center"><img src="images/ej3_near3.png" width=700 ></div>
-17. Ir a la barra de herramientas -> raster -> extraccion -> clipper
-18. archivo de entrada = __*nn_haplo*__, archivo de salida = __*nn_haplo_bound*__, metodo de cortado = capa mascara, capa mascara = __*study_boundary*__. Aceptar.
-19. Cambiar la simbologia.
+17. Ir a la __*barra de herramientas -> raster -> extraccion -> clipper**__.
+18. Archivo de entrada = __*nn_haplo*__, archivo de salida = __*nn_haplo_bound*__, metodo de cortado = __*capa mascara*__, capa mascara = __*study_boundary*__. Aceptar.
+19. Cambiar la simbología.
 <div align="center"><img src="images/ej3_near4.png" width=700 ></div>
+
+# Ejercicio 4
+## Nueva composición de impresión
+1. Con los resultados obtenidos en el ejercicio 3, ir a la __*barra de herramientas -> Proyecto -> Nueva composición de impresión*__.
+<div align="center"><img src="images/ej4_new.png" width=700 ></div>
+
+2. Poner de título *myfirstcomposer*.
+<div align="center"><img src="images/ej4_title.png" width=200 ></div>
+<div align="center"><img src="images/ej4_addedmap.png" width=700 ></div>
+
+## Definir escala y agregar grilla
+3. Dar click en el ícono __*Agregar nuevo mapa*__ <div align="left"><img src="images/icon_newmap.png" width=40 ></div> y dibujar en rectángulo en el lienzo, el cual contendrá el mapa realizado en QGIS.
+4. Dar click en el ícono __*Mover contenido del objeto*__ <div align="left"><img src="images/icon_moveitem.png" width=40 ></div>, y centrar la imagen del mapa.
+5. Con el mapa seleccionado, ir a la pestaña de __*propiedades del objeto*__, en __*propiedades principales*__ establecer escala 5000. Volver a centrar la imagen con la herramienta __*Mover contenido del objeto*__ de ser necesario.
+6. En la pestaña de __*propiedades del objeto*__, ir a __*grilla*__, dar click en el símbolo __*Agregar*__*+*, seleccionar __*dibujar grilla 1*__, __*unidad de intervalo*__ = unidades del mapa, __*intervalo*__ x= 0.001, y= 0.002, seleccionar __*mostrar coordenadas*__.
+<div align="center"><img src="images/ej4_grid.png" width=700 ></div>
+<div align="center"><img src="images/ej4_grid2.png" width=700 ></div>
+
+## Agregar leyenda
+7. Dar click en el ícono __*Agregar leyenda*__, dibujar un rectángulo en el cual se encontrará la leyenda.
+<div align="center"><img src="images/ej4_legend.png" width=700 ></div>
+
+8. Con la leyenda seleccionada ir a la pestaña de propiedades del objeto, quitar la selección a la opción de actualizar automaticamente y eliminar las entradas que no se necesitan con el símbolo __*remover*__ *-* (dejar solo el resultado de *heatmap* y *nearest neighbour*).
+9. Seleccionar el item que contiene el **heatmap** y dar click en el símbolo de __*edición*__, cambiarle el nombre a **Parasimetia of P. vivax**, hacer lo mismo para el **nearest neighbour** y ponerle de nombre **Haplogroups distribution**.
+<div align="center"><img src="images/ej4_legend_ip.png" width=200 ></div>
+
+10. En la opción de __*columnas*__, cambiar a 2, seleccionar enmarcado (Frame).
+<div align="center"><img src="images/ej4_legend_ip2.png" width=200 ></div>
+<div align="center"><img src="images/ej4_legend2.png" width=700 ></div>
+
+## Agregar escala gráfica
+11. Hacer click en el símbolo __*Agregar escala*__ <div align="left"><img src="images/icon_scalebar.png" width=40 ></div> , y dibujar un rectángulo. 
+12. Hacer click en el símbolo __*Agregar imagen*__ <div align="left"><img src="images/icon_addimage.png" width=40 ></div> , y dibujar un rectangulo. En las propiedades del objeto expandir __*buscar directorios*__ y elegir una imagen que represente la dirección norte.
+<div align="center"><img src="images/ej4_northarrow2.png" width=200 ></div>
+<div align="center"><img src="images/ej4_northarrow.png" width=700 ></div>
+
+## Agregar texto
+13. Hacer click en el símbolo __*Agregar texto*__ <div align="left"><img src="images/icon_text.png" width=40 ></div>, dibujar un rectangulo. En las propiedades del objeto, cambiar el texto y poner **My first map**.
+<div align="center"><img src="images/ej4_texttitle2.png" width=200 ></div>
+<div align="center"><img src="images/ej4_texttitle.png" width=700 ></div>
+
+## Agregar forma
+14. Hacer click en el símbolo __*Agregar forma -> Rectangulo*__ <div align="left"><img src="images/icon_shape.png" width=40 ></div>, dibujar un rectángulo que enmarque a la hoja de trabajo. 
+15. En propiedades del objeto cambiar el estilo y darle un relleno vacío. De esta manera nuestro mapa tendrá un marco.
+<div align="center"><img src="images/ej4_shape2.png" width=200 ></div>
+<div align="center"><img src="images/ej4_shape.png" width=700 ></div>
+
+## Exportación
+16. Dar click en el símbolo <div align="left"><img src="images/icon_exportpdf.png" width=40 ></div>. y guardar el archivo en la dirección de su proyecto.
