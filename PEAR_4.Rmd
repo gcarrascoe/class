@@ -1,0 +1,208 @@
+---
+title: Principios de Estadística Aplicada con R
+subtitle: Pruebas de hipótesis
+Project: 
+author:
+- name: Gabriel Carrasco Escobar
+  affiliation: Universidad Peruana Cayetano Heredia
+- name: Jorge Ruiz Cabrejos
+  affiliation: Universidad Peruana Cayetano Heredia
+Comment:
+web: 
+date: 19 de febrero del 2018
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+---
+
+<p style="text-align: center;"> 
+Rutinas y comandos complementarios del curso *Principios de Estadística Aplicada con R (PEAR)*
+
+*Cualquier problema con este código, porfavor contactar a gabriel.carrasco@upch.pe*
+</p>
+
+Los paquetes que se utilizaran son:
+
+```{r message = FALSE, warning = FALSE}
+library(dplyr)
+library(epiDisplay)
+```
+
+```{r include = FALSE}
+rm(list=ls())
+wd <- "C:/Users/Jorge/Desktop/Universidad/Curso R - FASPA"
+csv <- "Databases/Winzell2004_covar_v2.csv"
+dat <- read.csv(file.path(wd, csv))
+set.seed(1)
+```
+
+Los ejercicios a continuación utilizan la base de datos `Winzell2004_covar_v2.csv`, a la que colocaremos de nombre `dat`. 
+```{r eval = FALSE, message = FALSE, warning = FALSE}
+dat <- read.csv("C:/Usuario/Estudiante/Escritorio/Estadistica/Winzell2004_covar_v2.csv")
+```
+
+## Pruebas de hipótesis paramétricas
+
+### Diferencia de medias - Prueba T-Test
+
+La prueba de t-test se utiliza para comparar variables continuas en dos grupos. La variable dependiente numerica tiene que tener **distribución normal**.
+
+En este caso, los grupos de comparación estan en la variable `Diet` (dieta `chow` y dieta `hf`. Asumiremos que nuestra variable numérica, peso, tiene distribución normal.
+
+**Nota:[Revisar el análisis de dsitribución normal](https://gcarrascoe.github.io/class/PEAR_2.html)**
+
+Nuestra base de datos `Dat` contiene la información de la población. Para fines de esta práctica, seleccionaremos una muestra de 200 ratones utilizando la función `sample_n` para seleccionar una muestra.
+
+```{r}
+sample<-sample_n(dat,200)
+```
+
+Utilizamos `var.test` para determinar si existe homogeneidad de varianzas.
+
+```{r}
+var.test(sample$Bodyweight~sample$Diet)
+```
+
+El resultado de nuestro interés es el `p-value` o valor de p.
+
+  - Hipotesis nula (H0): Varianzas iguales
+  - Hipotesis Alternativa (Ha): Varianzas diferentes
+
+
+Si `p-value` es **menor** a 0.05, se considera significativo y se rechaza la hipótesis nula. Es decir, se concluye que las varianzas son diferentes.
+
+Si `p-value` es **mayor** a 0.05, se considera no significativo y no se rechaza la hipótesis nula. Es decir, se concluye que las varianzas son iguales
+
+<p style="text-align: center;"> 
+**NOTA:** El valor de p puede dar como resultado un valor como: `p-value = 1.92e-07`.
+
+Esto ocurre debido a que 1.92e-07 es la notación científica para 0.000000192. Es decir, p es menor a 0.05.
+</p>
+
+### Varianzas diferentes - Test de Welch
+
+Para nuestro caso, al ser las varianzas diferentes utilizamos el test de Welch con la función `t.test`. 
+
+Las variables a comparar son `sample$Bodyweight` y `sample$Diet`.
+
+Colocamos `var.equal = FALSE ` al ser las varianzas diferentes.
+
+```{r}
+t.test(sample$Bodyweight~sample$Diet,var.equal = FALSE, paired=FALSE)
+```
+
+Utilizamos el resultado de `p-value` para determinar si existe una diferencia estadisticamente significativa.
+
+  - Hipotesis nula (H0): La diferencia de medias es igual a 0
+  - Hipotesis Alternativa (Ha): La diferencia de medias no es igual a 0
+
+Si `p-value` es **menor** a 0.05, se considera significativo y se rechaza la hipótesis nula. Es decir, se concluye que las medias son estadisticamente diferentes entre los grupos.
+
+Si `p-value` es **mayor** a 0.05, se considera no significativo y no se rechaza la hipótesis nula. Es decir, se concluye que las medias no son estadisticamente diferentes entre los grupos.
+
+### Varianzas iguales - Test de Student
+
+En el caso de tener varianzas iguales (un p>0.05 al utilizar `var.test`), utilizamos el test de student.
+
+Las variables a comparar son `sample$Bodyweight` y `sample$Diet`.
+
+Al ser las varianzas iguales, colocamos `var.equal = TRUE`.
+
+```{r}
+t.test(sample$Bodyweight~sample$Diet,var.equal = TRUE, paired= FALSE)
+```
+
+Utilizamos el resultado de `p-value` para determinar si existe una diferencia estadisticamente significativa.
+
+  - Hipotesis nula (H0): La diferencia de medias es igual a 0
+  - Hipotesis Alternativa (Ha): La diferencia de medias no es igual a 0
+
+Si `p-value` es **menor** a 0.05, se considera significativo y se rechaza la hipótesis nula. Es decir, se concluye que las medias son estadisticamente diferentes entre los grupos.
+
+Si `p-value` es **mayor** a 0.05, se considera no significativo y no se rechaza la hipótesis nula. Es decir, se concluye que las medias no son estadisticamente diferentes entre los grupos.
+
+## Pruebas de hipótesis no paramétricas
+
+### Prueba de Mann-Whitney
+La prueba de Mann-Whitney se utiliza para comparar variables continuas en dos grupos. La variable dependiente numerica tiene que tener **distribución no normal**.
+
+Para el siguiente caso, utilizamos las categorias de sexo `M` y `F`. Nuestra variable numérica sera `en_intake`, la cual tiene una distribución no normal:
+
+```{r}
+hist(sample$en_intake)
+```
+
+La prueba de Mann-Whitney **no compara medianas**; determina si una variable tiene valores más altos (localización entre grupos).
+
+La función que se utiliza para realizar el test es `wilcox.test`
+
+```{r}
+wilcox.test(en_intake~Sex,data=sample)
+```
+
+Utilizamos el resultado de `p-value` para determinar si existe una diferencia estadisticamente significativa.
+
+  - Hipotesis nula (H0): Las poblaciones tienen localizaciones iguales
+  - Hipotesis Alternativa (Ha): Las poblaciones difieren con respecto a la localización
+
+Si `p-value` es **menor** a 0.05, se considera significativo y se rechaza la hipótesis nula. Es decir, se concluye que las localizaciones (valores) son estadisticamente diferentes entre los grupos.
+
+Si `p-value` es **mayor** a 0.05, se considera no significativo y no se rechaza la hipótesis nula. Es decir, se concluye que las localizaciones (valores) no son estadisticamente diferentes entre los grupos.
+
+### Prueba Fisher Exact
+
+El test de Fisher Exact es una prueba de independencia para una tabla de contingencia comparando dos variables categóricas.
+
+Para el siguiente caso, comparamos las categorias de dieta (`chow` y `hf`) con sexo (`M` y `F`).
+
+La función utiliza una tabla para el análisis. Por lo que primero pasaremos nuestros datos de `Diet` y `Sex` a un objeto tabla con `table`.
+
+```{r}
+tabla_fisher<-table(sample$Diet,sample$Sex)
+tabla_fisher
+```
+
+Utilizamos la función `fisher.test` con el objeto tabla creado para obtener nuestro resultado.
+
+```{r}
+fisher.test(tabla_fisher)
+```
+
+Utilizamos `p-value` para determinar si existe una diferencia estadisticamente significativa.
+
+  - Hipotesis nula (H0): Las variables son independientes
+  - Hipotesis Alternativa (Ha): Las variables no son independientes
+
+Si `p-value` es **menor** a 0.05, se considera significativo y se rechaza la hipótesis nula. Es decir, se concluye que sexo y dieta están asociados de forma significativa.
+
+Si `p-value` es **mayor** a 0.05, se considera no significativo y no se rechaza la hipótesis nula. Es decir, se concluye que sexo y dieta no están asociados de forma significativa.
+
+### Prueba X² de Pearson
+
+La prueba X² de Pearson se utiliza para comparar variables categóricas.
+
+Para el siguiente caso, compararemos las categorias de dieta (`chow` y `hf`) con sexo (`M` y `F`).
+
+La función utiliza una tabla para el análisis. Por lo que primero pasaremos nuestros datos de `Diet` y `Sex` a un objeto tabla con `table`.
+
+```{r}
+tabla_chi<-table(sample$Diet,sample$Sex)
+tabla_chi
+```
+
+Utilizamos la función `chisq.test` con el objeto tabla creado para obtener nuestro resultado.
+
+```{r}
+chisq.test(tabla_chi)
+```
+
+Utilizamos `p-value` para determinar si existe una diferencia estadisticamente significativa.
+
+  - Hipotesis nula (H0): Las variables son independientes
+  - Hipotesis Alternativa (Ha): Las variables no son independientes
+
+Si `p-value` es **menor** a 0.05, se considera significativo y se rechaza la hipótesis nula. Es decir, se concluye que sexo y dieta están asociados de forma significativa.
+
+Si `p-value` es **mayor** a 0.05, se considera no significativo y no se rechaza la hipótesis nula. Es decir, se concluye que sexo y dieta no están asociados de forma significativa.
+
