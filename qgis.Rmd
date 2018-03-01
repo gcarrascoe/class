@@ -9,7 +9,7 @@ author:
   affiliation: Universidad Peruana Cayetano Heredia
 Comment:
 web:
-date: 21 de febrero del 2018
+date: 01 de marzo del 2018
 output:
 
   html_document:
