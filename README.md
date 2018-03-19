@@ -2,7 +2,7 @@
 
 Repository for lectures and R codes
 
-Principios de Estadistica aplicada con R
+## Principios de Estadistica aplicada con R
 
 * [Instalación de R y pre-requisitos](https://gcarrascoe.github.io/class/PEAR)
 
@@ -17,7 +17,7 @@ Principios de Estadistica aplicada con R
 * [Pruebas de Hipótesis No Paramétricas](https://gcarrascoe.github.io/class/PEAR_5)
 
 
-Introduccion al Analisis Espacial con QGIS
+## Introduccion al Analisis Espacial con QGIS
 
 * [Instalación de QGIS y pre-requisitos](https://gcarrascoe.github.io/class/qgis_instalacion)
 
