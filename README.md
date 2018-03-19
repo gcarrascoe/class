@@ -12,9 +12,7 @@ Repository for lectures and R codes
 
 * [Teorema de Límite Central y distribucion de probabilidad](https://gcarrascoe.github.io/class/PEAR_3)
    
-* [Pruebas de Hipótesis Paramétricas](https://gcarrascoe.github.io/class/PEAR_4)
-   
-* [Pruebas de Hipótesis No Paramétricas](https://gcarrascoe.github.io/class/PEAR_5)
+* [Pruebas de Hipótesis](https://gcarrascoe.github.io/class/PEAR_4)
 
 
 ## Introduccion al Analisis Espacial con QGIS
